@@ -2,12 +2,23 @@
 
 namespace App\Http\Controller\Auth;
 
+use App\Http\Requests\LoginUserRequest;
+use App\Infrastructure\Services\LoginUserService;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
-class LoginPostAction
+readonly class LoginPostAction
 {
-    public function __invoke(): JsonResponse
+    public function __construct(
+        private LoginUserService $loginUserService
+    ) {
+    }
+
+    public function __invoke(LoginUserRequest $request): JsonResponse
     {
-        return new JsonResponse(['message' => 'Hello World!']);
+        return new JsonResponse(
+            ($this->loginUserService)($request),
+            Response::HTTP_OK
+        );
     }
 }

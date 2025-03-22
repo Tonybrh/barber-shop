@@ -5,7 +5,6 @@ namespace App\Http\Requests;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Password;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 class CreateUserRequest extends FormRequest
@@ -20,8 +19,10 @@ class CreateUserRequest extends FormRequest
         return [
             'name' => ['string', 'required'],
             'email' => ['string', 'email', 'required'],
+            'phone' => ['string', 'required'],
             'roles' => ['nullable'],
             'password' => [Password::min(5)->letters()->numbers()],
+            'user_type_id' => ['integer', 'required'],
         ];
     }
 
