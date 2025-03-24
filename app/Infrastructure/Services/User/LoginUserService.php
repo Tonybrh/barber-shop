@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Infrastructure\Services;
+namespace App\Infrastructure\Services\User;
 
 use App\Domain\Dto\UserLoggedResponseDto;
 use App\Domain\Exceptions\UserUnauthorizedException;

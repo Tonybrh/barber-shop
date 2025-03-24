@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Domain\Enum\UserTypeEnum;
 use App\Domain\Models\User;
+use App\Domain\Service\LoggedUserServiceInterface;
+use App\Infrastructure\Services\User\LoggedUserService;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use JMS\Serializer\SerializerBuilder;
@@ -31,5 +33,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(SerializerInterface::class, function () {
             return SerializerBuilder::create()->build();
         });
+
+        $this->app->bind(
+            LoggedUserServiceInterface::class,
+            LoggedUserService::class
+        );
     }
 }

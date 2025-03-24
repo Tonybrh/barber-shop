@@ -3,7 +3,7 @@
 namespace App\Http\Controller\Auth;
 
 use App\Http\Requests\LoginUserRequest;
-use App\Infrastructure\Services\LoginUserService;
+use App\Infrastructure\Services\User\LoginUserService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 

@@ -3,6 +3,7 @@
 namespace App\Domain\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Reservation extends Model
 {
@@ -12,12 +13,21 @@ class Reservation extends Model
         'email',
         'phone',
         'date',
-        'time',
-        'guests',
-        'message',
+        'user_id',
+        'barber_id'
     ];
 
     protected $casts = [
         'date' => 'datetime',
+        'name' => 'string',
+        'email' => 'string',
+        'phone' => 'string',
+        'user_id' => 'integer',
+        'barber_id' => 'integer'
     ];
+
+    public function user_id(): HasOne
+    {
+        return $this->hasOne(User::class);
+    }
 }
