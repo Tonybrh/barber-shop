@@ -3,6 +3,7 @@
 namespace App\Domain\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Reservation extends Model
@@ -25,8 +26,8 @@ class Reservation extends Model
         'barber_id' => 'integer'
     ];
 
-    public function user_id(): HasOne
+    public function user_id(): BelongsToMany
     {
-        return $this->hasOne(User::class);
+        return $this->belongsToMany(User::class);
     }
 }

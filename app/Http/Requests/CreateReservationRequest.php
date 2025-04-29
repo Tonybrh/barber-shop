@@ -9,8 +9,8 @@ class CreateReservationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'barber_id' => 'required|integer|exists:barbers,id',
-            'date' => 'required|date_format:Y-m-d H:i:s',
+            'barber_id' => 'required|integer|exists:users,id,role,barber',
+            'date' => 'required|date_format:d-m-Y H:i:s',
         ];
     }
 

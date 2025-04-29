@@ -13,11 +13,19 @@ readonly class ReservationRepository implements ReservationRepositoryInterface
 
     public function save(Reservation $reservation): void
     {
-        $this->reservation->query()->save($reservation);
+        $reservation->save();
     }
 
     public function findAll(): array
     {
         return $this->reservation->query()->get()->toArray();
+    }
+
+    public function hasActiveReservation(int $userId): bool
+    {
+        return $this->reservation->query()
+            ->where('user_id', $userId)
+            ->where('active', true)
+            ->exists();
     }
 }

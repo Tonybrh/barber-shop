@@ -17,6 +17,10 @@ readonly class CreateReservationService
 
     public function __invoke(CreateReservationRequest $request): void
     {
+        if($this->hasActiveReservation($this->userService->getId())) {
+            throw new \Exception('Você já tem um agendamento ativo.');
+        }
+
         $reservation = ReservationBuilder::build(
             $this->userService->getName(),
             $this->userService->getEmail(),
@@ -27,5 +31,10 @@ readonly class CreateReservationService
         );
 
         $this->reservationRepository->save($reservation);
+    }
+
+    private function hasActiveReservation(int $userId): bool
+    {
+        return $this->reservationRepository->hasActiveReservation($userId);
     }
 }
