@@ -3,14 +3,14 @@
 namespace App\Http\Controller\Reservation;
 
 use App\Http\Requests\CreateReservationRequest;
-use App\Infrastructure\Services\Reservation\ReservationService;
+use App\Infrastructure\Services\Reservation\CreateReservationService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
-class CreateReservationPostAction
+readonly class CreateReservationPostAction
 {
     public function __construct(
-        private ReservationService $reservationService
+        private CreateReservationService $reservationService
     ) {
     }
 

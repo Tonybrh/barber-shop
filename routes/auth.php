@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/login', LoginPostAction::class)->name('login');
-Route::post('/register', CreateUserPostAction::class)->name('register');
+Route::post('/register', CreateUserPostAction::class)->name('user.create');
 
 Route::get('/email/verify', function() {
     return view('auth.verify-email');

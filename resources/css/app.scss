@@ -1,0 +1,19 @@
+/* resources/css/app.scss */
+$primary: #333333;
+$secondary: #949397;
+@import 'bootstrap/scss/bootstrap';
+
+.input-underline {
+    border: none;
+    border-bottom: 1px solid #E0E0E0;
+    border-radius: 0;
+    background-color: transparent;
+    color: #E0E0E0;
+
+    &:focus {
+        outline: none;
+        box-shadow: none;
+        border-bottom: 2px solid $primary; // ou uma cor fixa tipo #1E88E5
+    }
+}
+

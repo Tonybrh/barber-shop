@@ -19,10 +19,9 @@ class CreateUserRequest extends FormRequest
         return [
             'name' => ['string', 'required'],
             'email' => ['string', 'email', 'required'],
-            'phone' => ['string', 'required'],
-            'roles' => ['nullable'],
+            'phone' => ['string', 'required', 'regex:/^\d{11}$/'],
+            'role' => ['nullable'],
             'password' => [Password::min(5)->letters()->numbers()],
-            'user_type_id' => ['integer', 'required'],
         ];
     }
 
