@@ -20,7 +20,7 @@ class ReservationBuilder
             'phone' => $phone,
             'date' => $date,
             'user_id' => $userId,
-            'barber_id' => $barberId
+            'barber_id' => $barberId,
         ]);
     }
 }

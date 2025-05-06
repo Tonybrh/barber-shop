@@ -30,7 +30,9 @@ readonly class CreateReservationService
             $request->input('barber_id')
         );
 
+
         $this->reservationRepository->save($reservation);
+        $reservation->services()->attach($request->input('services'));
     }
 
     private function hasActiveReservation(int $userId): bool

@@ -32,8 +32,8 @@ class Reservation extends Model
         return $this->belongsToMany(User::class);
     }
 
-    public function services(): HasMany
+    public function services(): BelongsToMany
     {
-        return $this->hasMany(Service::class);
+        return $this->belongsToMany(Service::class, 'reservation_services');
     }
 }

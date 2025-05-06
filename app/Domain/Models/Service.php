@@ -3,7 +3,7 @@
 namespace App\Domain\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Service extends Model
 {
@@ -14,8 +14,8 @@ class Service extends Model
         'duration',
     ];
 
-    public function reservartion(): BelongsTo
+    public function reservartion(): BelongsToMany
     {
-        return $this->belongsTo(Reservation::class);
+        return $this->belongsToMany(Reservation::class, 'reservation_services');
     }
 }

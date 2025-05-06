@@ -11,6 +11,7 @@ class CreateReservationRequest extends FormRequest
         return [
             'barber_id' => 'required|integer|exists:users,id,role,barber',
             'date' => 'required|date_format:d-m-Y H:i:s',
+            'services' => 'required|array|exists:services,id',
         ];
     }
 
