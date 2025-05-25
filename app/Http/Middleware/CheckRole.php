@@ -10,7 +10,9 @@ class CheckRole
 {
     public function handle(Request $request, Closure $next, ...$roles)
     {
-        if (!in_array(auth()->user()->role, $roles)) {
+        $userRoles = auth()->user()->roles->pluck('name')->toArray();
+
+        if (empty(array_intersect($userRoles, $roles))) {
             abort(Response::HTTP_FORBIDDEN, 'Acesso negado.');
         }
 

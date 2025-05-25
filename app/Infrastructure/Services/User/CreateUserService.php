@@ -14,6 +14,8 @@ class CreateUserService
 
         $token = auth()->login($user);
 
+        $user->syncRoles($request->roles);
+
         return new UserLoggedResponseDto(
             $token,
             'Bearer',
