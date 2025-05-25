@@ -12,9 +12,12 @@ class CreateUserService
     {
         $user = User::query()->create($request->validated());
 
+        $token = auth()->login($user);
+
         return new UserLoggedResponseDto(
-            $user->createToken('auth_token')->plainTextToken,
-            'Bearer'
+            $token,
+            'Bearer',
+            $user
         );
     }
 }

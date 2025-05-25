@@ -3,23 +3,23 @@
 namespace App\Infrastructure\Services\User;
 
 use App\Domain\Dto\UserLoggedResponseDto;
-use App\Domain\Exceptions\UserUnauthorizedException;
+use App\Domain\Models\User;
 use App\Http\Requests\LoginUserRequest;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\UserResource;
+use Symfony\Component\HttpFoundation\Response;
 
 class LoginUserService
 {
-    public function __invoke(LoginUserRequest $request): UserLoggedResponseDto
+    public function __invoke(LoginUserRequest $request): UserLoggedResponseDto | Response
     {
-        $credentials = $request->validated();
+        $user = User::where('email', $request->email)->first();
 
-        if (!Auth::attempt($credentials)) {
-            throw new UserUnauthorizedException();
+        $token = auth()->attempt($request->validated());
+
+        if (!$user || !$token) {
+            return response()->json(['message' => 'Login ou senha inválidos'], Response::HTTP_UNAUTHORIZED);
         }
 
-        $user = Auth::user();
-        $token = $user->createToken('auth_token')->plainTextToken;
-
-        return new UserLoggedResponseDto($token, 'Bearer');
+        return new UserLoggedResponseDto($token, 'Bearer', new UserResource($user));
     }
 }
